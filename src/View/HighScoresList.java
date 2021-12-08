@@ -7,34 +7,50 @@ import java.util.Vector;
 
 public class HighScoresList extends AbstractListModel
 {
-    private Vector<String> nick;
-    private Vector<Integer> scores;
+    private Vector<String> highScore;
 
-    public HighScoresList(Vector<String> nick, Vector<Integer> scores) {
-        this.nick = nick;
-        this.scores = scores;
+    public HighScoresList(Vector<String> highScore)
+    {
+        this.highScore = highScore;
     }
 
     @Override
     public int getSize() {
-        return nick.size();
+        return highScore.size();
     }
 
     @Override
     public Object getElementAt(int index)
     {
-        return nick.get(index);
+        return highScore.get(index);
     }
 
-    
-    public void AddScore(String name, int score, int index)
+
+    public void AddScore(Score score, int index)
     {
-       nick.add(index, name);
-       scores.add(index, score);
+       highScore.add(index, score.toString());
        fireIntervalAdded(this, index, index);
     }
-}
-class HighScore()
-{
 
+    public void AddScore(Score score)
+    {
+        highScore.add(getSize(), score.toString());
+    }
+}
+class Score
+{
+    String nick;
+    int score;
+
+    Score(String nick, int score)
+    {
+        this.nick = nick;
+        this.score = score;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "NICK: " + nick + " SCORE: " + score;
+    }
 }

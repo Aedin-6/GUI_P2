@@ -7,13 +7,14 @@ public class HighScoreListFrame extends JFrame
 {
         HighScoreListFrame()
         {
-            Vector<String> nicks = new Vector<>();
-            Vector<Integer> scores = new Vector<>();
-            nicks.add("Abs");
-            nicks.add("qew");
-            scores.add(123);
-            scores.add(432);
-            HighScoresList highScoreList = new HighScoresList(nicks, scores);
+            Vector<String> highScores = new Vector<>();
+            Score score = new Score("Wojtek", 124);
+            Score score2 = new Score("Zbych", 124);
+            highScores.add(0, score.toString());
+            highScores.add(score2.toString());
+
+            HighScoresList highScoreList = new HighScoresList(highScores);
+
             JList hscores = new JList();
             hscores.setModel(highScoreList);
 

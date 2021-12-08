@@ -71,16 +71,19 @@ public class StartFrame extends JFrame
             {
             case "Easy":
             {
+                new GameFrame();
                 GameModel.Start.StartNewGame((String) selectedValue);
                 break;
             }
             case "Normal":
             {
+                new GameFrame();
                 GameModel.Start.StartNewGame((String) selectedValue);
                 break;
             }
             case "Hard":
             {
+                new GameFrame();
                 GameModel.Start.StartNewGame((String) selectedValue);
                 break;
             }
