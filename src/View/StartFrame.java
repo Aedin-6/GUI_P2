@@ -21,7 +21,6 @@ public class StartFrame extends JFrame
         Container pane = frame.getContentPane();
 
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        pane.setLocation(123, 4324);
 
         JButton newGame = new JButton("New Game");
         newGame.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -48,7 +47,7 @@ public class StartFrame extends JFrame
             System.exit(0);
         });
 
-        frame.setSize(300,150);
+        frame.setSize(290,125);
         frame.setVisible(true);
     }
 

@@ -6,4 +6,8 @@ public class Start
     {
 
     }
+
+    public static void GameOver()
+    {
+    }
 }
