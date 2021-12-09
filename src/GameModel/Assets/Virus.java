@@ -2,25 +2,33 @@ package GameModel.Assets;
 
 import GameModel.Start;
 
+import static View.StartFrame.getDifficulty;
+
 public class Virus
 {
-    private int count;
+    public static int count;
     private final int maxCount = 50000000;
 
-    private Virus()
+    public Virus()
     { }
 
-    private void IncreseCount()
+    private void IncreaseCount(int viruses)
     {
-        count++;
+        count+=viruses;
     }
 
-    private void Spread()
+    public static void Spread()
     {
-        count+=10;
+        String diff = getDifficulty();
+        switch (diff)
+        {
+            case "Easy" -> count += 10;
+            case "Normal" -> count += 20;
+            case "Hard" -> count += 30;
+        }
     }
 
-    private void MaxAchived()
+    private void MaxAchieved()
     {
         if (count == maxCount)
         {

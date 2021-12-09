@@ -5,6 +5,18 @@ import java.awt.*;
 
 public class StartFrame extends JFrame
 {
+    private static String difficulty;
+
+    public static String getDifficulty()
+    {
+        return difficulty;
+    }
+
+    public static void setDifficulty(String difficulty)
+    {
+        StartFrame.difficulty = difficulty;
+    }
+
     public StartFrame()
     {
         GenerateStartFrame();
@@ -63,34 +75,28 @@ public class StartFrame extends JFrame
                 "Choose Difficulty:", "Set Difficulty",
                 JOptionPane.QUESTION_MESSAGE, null,
                 possibleValues, possibleValues[0]);
-
+        setDifficulty((String) selectedValue);
         if (selectedValue != null)
         {
-            switch((String) selectedValue)
+            switch ((String) selectedValue)
             {
-            case "Easy":
-            {
-                new GameFrame();
-                GameModel.Start.StartNewGame((String) selectedValue);
-                break;
-            }
-            case "Normal":
-            {
-                new GameFrame();
-                GameModel.Start.StartNewGame((String) selectedValue);
-                break;
-            }
-            case "Hard":
-            {
-                new GameFrame();
-                GameModel.Start.StartNewGame((String) selectedValue);
-                break;
-            }
+                case "Easy" -> {
+
+                    new GameFrame();
+                    GameModel.Start.StartNewGame((String) selectedValue);
+                }
+                case "Normal" -> {
+                    new GameFrame();
+                    GameModel.Start.StartNewGame((String) selectedValue);
+                }
+                case "Hard" -> {
+                    new GameFrame();
+                    GameModel.Start.StartNewGame((String) selectedValue);
+                }
             }
         }
         else
            GenerateStartFrame();
-
     }
 }
 

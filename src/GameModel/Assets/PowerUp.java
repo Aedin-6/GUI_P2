@@ -6,18 +6,18 @@ public class PowerUp
     private String id = "P";
     private boolean isActive;
     private int cost;
-    private int strenght;
+    private int strength;
     private static int counter;
 
 
-    public PowerUp(String name, String id, int cost, int strenght)
+    public PowerUp(String name, int cost, int strength)
     {
         this.name = name;
         id = id + counter;
         counter++;
         this.isActive = false;
         this.cost = cost;
-        this.strenght = strenght;
+        this.strength = strength;
     }
 
     private void Activate()
