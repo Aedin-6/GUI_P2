@@ -1,5 +1,6 @@
 package GameModel;
 
+import GameModel.Assets.Player;
 import GameModel.Assets.Virus;
 
 import java.text.DateFormat;
@@ -33,6 +34,8 @@ public class TimeFlow implements Runnable
             time = time.plusSeconds(1);
             sleep(1000);
             Virus.Spread();
+            Virus.MaxAchieved();
+            Player.ConstantPointsIncrease();
             System.out.println(time);
             System.out.println(Virus.count);
         }

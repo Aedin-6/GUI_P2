@@ -18,10 +18,14 @@ public class Start
         Virus  _virus = new Virus();
         Player _player = new Player();
 
+
+
     }
 
     public static void GameOver()
     {
+        System.out.println("You lost");
+        System.exit(0);
     }
 
 }

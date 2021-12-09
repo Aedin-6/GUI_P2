@@ -16,4 +16,9 @@ public class Player
     {
         points+=cost;
     }
+
+    public static void ConstantPointsIncrease()
+    {
+        points+=1000;
+    }
 }

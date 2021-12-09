@@ -7,7 +7,6 @@ import static View.StartFrame.getDifficulty;
 public class Virus
 {
     public static int count;
-    private final int maxCount = 50000000;
 
     public Virus()
     { }
@@ -19,18 +18,21 @@ public class Virus
 
     public static void Spread()
     {
+        int _countriesInfected = Country.GetInfectedCount();
         String diff = getDifficulty();
         switch (diff)
         {
-            case "Easy" -> count += 10;
-            case "Normal" -> count += 20;
-            case "Hard" -> count += 30;
+            case "Easy" -> count += _countriesInfected*1000;
+            case "Normal" -> count += _countriesInfected*2000;
+            case "Hard" -> count += _countriesInfected*3000;
         }
     }
 
-    private void MaxAchieved()
+
+    public static void MaxAchieved()
     {
-        if (count == maxCount)
+        int _maxCount = 50000000;
+        if (count >= _maxCount)
         {
             Start.GameOver();
         }
