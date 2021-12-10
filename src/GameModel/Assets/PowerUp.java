@@ -20,7 +20,7 @@ public class PowerUp
         this.strength = strength;
     }
 
-    private void Activate()
+    public void Activate()
     {
         isActive = true;
         Player.RemovePoints(cost);

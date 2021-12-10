@@ -1,5 +1,7 @@
 package View;
 
+import GameModel.Assets.PowerUp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +16,8 @@ public class ButtonActions
         countryMenu.setSize(250,100);
         countryMenu.setVisible(true);
         countryMenu.setLocationRelativeTo(null);
-        String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" }; // to change
-        JComboBox menu = new JComboBox(petStrings);
+        PowerUp[] _powerUps = {  }; // to change
+        JComboBox menu = new JComboBox(_powerUps);
         menu.setName("Power ups!");
         menu.setVisible(true);
         JButton ok = new JButton("Ok");
@@ -25,8 +27,8 @@ public class ButtonActions
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                var selected = (String) menu.getSelectedItem();
-                System.out.println(selected);
+                var chosenPA = (PowerUp) menu.getSelectedItem();
+                chosenPA.Activate();
                 countryMenu.dispose();
             }
         });
