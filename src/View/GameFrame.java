@@ -103,7 +103,15 @@ public class GameFrame extends JFrame
         JButton country = new JButton(name);
         country.setFont(nameFont);
         ButtonActions ba = new ButtonActions();
-        country.addActionListener(ba);
+        country.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ButtonActions ba = new ButtonActions();
+                ba.OpenCountryMenu();
+            }
+        });
         gameFramePanel.add(country);
 
     }
