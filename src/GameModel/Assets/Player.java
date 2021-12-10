@@ -21,4 +21,10 @@ public class Player
     {
         points+=1000;
     }
+
+    public static String GetStringPoints()
+    {
+        String playerPoints = String.valueOf(points);
+        return playerPoints;
+    }
 }

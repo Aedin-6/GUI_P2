@@ -12,7 +12,7 @@ import static java.lang.Thread.sleep;
 
 public class TimeFlow implements Runnable
 {
-    static LocalTime time = LocalTime.ofSecondOfDay(1);
+   public static LocalTime time = LocalTime.ofSecondOfDay(1);
 
     @Override
     public void run()
