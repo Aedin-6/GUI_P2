@@ -19,12 +19,11 @@ public class Player
 
     public static void ConstantPointsIncrease()
     {
-        points+=1000;
+        points = points + 10*Country.GetInfectedCount();
     }
 
-    public static String GetStringPoints()
+    public static int GetPoints()
     {
-        String playerPoints = String.valueOf(points);
-        return playerPoints;
+        return points;
     }
 }

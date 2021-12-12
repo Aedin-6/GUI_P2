@@ -1,5 +1,7 @@
 package GameModel.Assets;
 
+import javax.swing.*;
+
 public class PowerUp
 {
     private String name;
@@ -22,8 +24,17 @@ public class PowerUp
 
     public void Activate()
     {
-        isActive = true;
-        Player.RemovePoints(cost);
+        if(Player.GetPoints() >= this.cost)
+        {
+            this.isActive = true;
+            Player.RemovePoints(cost);
+            Virus.ChangeSpreadRate(strength);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Not enough points!", "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void Deactivate()
@@ -35,5 +46,18 @@ public class PowerUp
     private String GetID()
     {
         return  id;
+    }
+
+    @Override
+    public String toString()
+    {
+        return  name +
+                ", Cost: " + cost +
+                ", Strength: " + strength;
+    }
+
+    public boolean GetIsActive()
+    {
+        return this.isActive;
     }
 }

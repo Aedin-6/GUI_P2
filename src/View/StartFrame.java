@@ -1,5 +1,7 @@
 package View;
 
+import GameModel.Start;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -55,9 +57,7 @@ public class StartFrame extends JFrame
         third.setAlignmentX(Component.CENTER_ALIGNMENT);
         pane.add(third);
 
-        third.addActionListener(e -> {
-            System.exit(0);
-        });
+        third.addActionListener(e -> System.exit(0));
 
         frame.setSize(290,125);
         frame.setVisible(true);
@@ -70,6 +70,7 @@ public class StartFrame extends JFrame
 
     private static void SetDifficulty()
     {
+        Start start = new Start();
         String[] possibleValues = { "Easy", "Normal", "Hard" };
         Object selectedValue = JOptionPane.showInputDialog(null,
                 "Choose Difficulty:", "Set Difficulty",
@@ -81,17 +82,16 @@ public class StartFrame extends JFrame
             switch ((String) selectedValue)
             {
                 case "Easy" -> {
-
+                    start.StartNewGame();
                     new GameFrame();
-                    GameModel.Start.StartNewGame((String) selectedValue);
                 }
                 case "Normal" -> {
+                    start.StartNewGame();
                     new GameFrame();
-                    GameModel.Start.StartNewGame((String) selectedValue);
                 }
                 case "Hard" -> {
+                    start.StartNewGame();
                     new GameFrame();
-                    GameModel.Start.StartNewGame((String) selectedValue);
                 }
             }
         }
