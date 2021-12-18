@@ -12,7 +12,7 @@ public class Player
         points-=cost;
     }
 
-    protected static void AddPoints(int cost)
+    public static void AddPoints(int cost)
     {
         points+=cost;
     }
@@ -25,5 +25,10 @@ public class Player
     public static int GetPoints()
     {
         return points;
+    }
+
+    public static void ClearPoints()
+    {
+        points = 0;
     }
 }

@@ -59,7 +59,7 @@ public class StartFrame extends JFrame
 
         third.addActionListener(e -> System.exit(0));
 
-        frame.setSize(290,125);
+        frame.setSize(300,120);
         frame.setVisible(true);
     }
 

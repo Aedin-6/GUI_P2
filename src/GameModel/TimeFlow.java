@@ -13,18 +13,26 @@ import static java.lang.Thread.sleep;
 
 public class TimeFlow implements Runnable
 {
-   public static LocalTime time = LocalTime.ofSecondOfDay(1);
-
+    public static LocalTime time = LocalTime.ofSecondOfDay(1);
+    private boolean exit = false;
     @Override
     public void run()
     {
-        try
+        while(!exit)
         {
-            TimeIncrese();
-        }
-        catch (InterruptedException e)
-        {
-            System.out.println("Something interrupted the date.");
+            try
+            {
+                time = time.plusSeconds(1);
+                sleep(1000);
+                Virus.Spread();
+                Player.ConstantPointsIncrease();
+                System.out.println(Virus.GetCount());
+                System.out.println(time);
+                //TimeIncrese();
+            } catch (InterruptedException e)
+            {
+                System.out.println("Something interrupted the thread.");
+            }
         }
     }
 
@@ -39,5 +47,9 @@ public class TimeFlow implements Runnable
             System.out.println(Virus.GetCount());
             System.out.println(time);
         }
+    }
+    public void setExit()
+    {
+        exit = true;
     }
 }

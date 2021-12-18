@@ -1,29 +1,28 @@
 package View;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Vector;
 
 public class HighScoreListFrame extends JFrame
 {
+
         HighScoreListFrame()
         {
-            Vector<String> highScores = new Vector<>();
-            Score score = new Score("Wojtek", 124);
-            Score score2 = new Score("Zbych", 124);
-            highScores.add(0, score.toString());
-            highScores.add(score2.toString());
-
+            Vector<String> highScores = HighScoresList.getHighScore();
+            JFrame hs = new JFrame("High Scores");
             HighScoresList highScoreList = new HighScoresList(highScores);
-
             JList hscores = new JList();
             hscores.setModel(highScoreList);
-
+            hscores.setBackground(Color.BLUE);
+            Font nameFont = new Font("Times New Roman", Font.BOLD, 20);
+            hscores.setFont(nameFont);
+            hscores.setForeground(Color.YELLOW);
             JScrollPane scorePane = new JScrollPane(hscores);
-            this.getContentPane().add(scorePane);
-            setSize(200, 200);
-            setVisible(true);
-            setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+            hs.getContentPane().add(scorePane);
+            hs.setSize(350, 300);
+            hs.setVisible(true);
+            hs.setLocationRelativeTo(null);
+            hs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 }

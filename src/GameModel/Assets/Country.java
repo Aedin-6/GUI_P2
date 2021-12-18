@@ -4,6 +4,7 @@ import View.GameFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Country
@@ -18,6 +19,17 @@ public class Country
     private boolean isContaminated;
     private static ArrayList<Country> countryList = new ArrayList<>();
     private ArrayList<PowerUp> powerUpsList = new ArrayList<>();
+    private ArrayList<Connections> connections = new ArrayList<>();
+
+    public ArrayList<Connections> getConnections()
+    {
+        return connections;
+    }
+
+    public void setConnections(ArrayList<Connections> connections)
+    {
+        this.connections = connections;
+    }
 
     public Country(String name, int population)
     {
@@ -29,6 +41,7 @@ public class Country
         id = id + count;
         isContaminated = false;
         worldPopulation += population;
+        countryList.add(this);
     }
 
     public static int GetInfectedCount()
@@ -36,7 +49,7 @@ public class Country
         return infectedCount;
     }
 
-    public static ArrayList<Country> GetContryList()
+    public static ArrayList<Country> GetCountryList()
     {
         return countryList;
     }
@@ -50,15 +63,14 @@ public class Country
     {
         return isContaminated;
     }
+    public void IncreaseInfectedPopulation(int viruses)
+    {
+        infectedPopulation= infectedPopulation + viruses;
+    }
 
     public int getPopulation()
     {
         return population;
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     public String getId()
@@ -106,4 +118,28 @@ public class Country
         return powerUpsList;
     }
 
+    public int GetInfectedPopulationCount()
+    {
+        return infectedPopulation;
+    }
+
+    public int GetPopulation()
+    {
+        return population;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Country country = (Country) o;
+        return Objects.equals(name, country.name) && Objects.equals(getId(), country.getId());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(name, getId());
+    }
 }

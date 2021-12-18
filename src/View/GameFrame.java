@@ -1,69 +1,104 @@
 package View;
 import GameModel.Assets.Country;
 import GameModel.Assets.Player;
+import GameModel.Assets.Virus;
 import GameModel.TimeFlow;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 
 public class GameFrame extends JFrame
 {
+    private static JFrame  gameFrame;
     private static ArrayList<JButton> btnList = new ArrayList<>();
     GameFrame()
     {
-        JFrame gameFrame = new JFrame();
-        gameFrame.setSize(1000, 1000);
-        gameFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        gameFrame.setVisible(true);
-        gameFrame.setLayout(new BorderLayout());
+        gameFrame = this;
 
-        JPanel scoreAndtimePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 400,0));
+        this.setTitle("Corona Anti Plague!");
+        this.setSize(1700, 1000);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+        this.setLayout(new BorderLayout());
+
+        JPanel scoreAndtimePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 300, 0));
         JLabel scoreLabel = new JLabel();
         scoreLabel.setVisible(true);
-        scoreLabel.setFont(new Font("Calibri", Font.BOLD, 25));
+        scoreLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
         scoreAndtimePanel.add(scoreLabel);
-        ActionListener scoreListener = e -> scoreLabel.setText(String.valueOf(Player.GetPoints()));
-        Timer scoreCheck = new Timer(1000, scoreListener);
+        ActionListener scoreListener = e -> scoreLabel.setText("Score: " + Player.GetPoints());
+        Timer scoreCheck = new Timer(100, scoreListener);
         scoreCheck.setInitialDelay(1);
         scoreCheck.start();
 
 
         JLabel timeLabel = new JLabel();
         timeLabel.setVisible(true);
-        timeLabel.setFont(new Font("Calibri", Font.BOLD, 25));
+        timeLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
         scoreAndtimePanel.add(timeLabel);
 
         ActionListener timerListener = e ->
         {
             String time = TimeFlow.time.toString();
-            timeLabel.setText(time);
+            timeLabel.setText("Time: " + time);
         };
-        Timer timer = new Timer(1000, timerListener);
+        Timer timer = new Timer(100, timerListener);
         timer.setInitialDelay(1);
         timer.start();
 
+        JLabel virusLabel = new JLabel();
+        virusLabel.setVisible(true);
+        virusLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
+        virusLabel.setForeground(Color.RED);
+        scoreAndtimePanel.add(virusLabel);
+        ActionListener virusListener = e -> virusLabel.setText("Virus/Population: "+ Virus.GetCount() + "/" + Country.GetWorldPopulation());
+        Timer virusCheck = new Timer(100, virusListener);
+        virusCheck.setInitialDelay(1);
+        virusCheck.start();
+
 
         JPanel gameFramePanel = new JPanel();
-        gameFramePanel.setLayout(new GridLayout(4,3, 10,10));
+        gameFramePanel.setLayout(new GridLayout(4, 3, 10, 10));
 
         Font nameFont = new Font("Times New Roman", Font.PLAIN, 24);
 
-        for(Country country: Country.GetContryList())
+        for (Country country : Country.GetCountryList())
             CreateCountryButton(gameFramePanel, country, nameFont);
 
 
-        gameFrame.getContentPane().add(BorderLayout.NORTH, scoreAndtimePanel);
-        gameFrame.getContentPane().add(BorderLayout.CENTER, gameFramePanel);
+        this.getContentPane().add(BorderLayout.NORTH, scoreAndtimePanel);
+        this.getContentPane().add(BorderLayout.CENTER, gameFramePanel);
+        this.setFocusable(true);
+        BreakListener breakListener = new BreakListener();
+        this.addKeyListener(breakListener);
+        Timer checkKeys = new Timer(10, breakListener.checkIfPressed);
+        checkKeys.start();
 
+    }
+
+    public static void exitFrame()
+    {
+        gameFrame.dispose();
     }
 
     private void CreateCountryButton(JPanel gameFramePanel, Country country, Font nameFont)
     {
         JButton countryBtn = new JButton(country.GetName());
         countryBtn.setFont(nameFont);
+
+        ActionListener countListener = e ->
+        {
+            String tttext = String.format("This tool tip for %s. \nPopulation: %2d.\nInfected Population: %2d", country.GetName(), country.GetPopulation(), country.GetInfectedPopulationCount());
+            countryBtn.setToolTipText(tttext);
+        };
+        Timer timer = new Timer(1000, countListener);
+        timer.setInitialDelay(1);
+        timer.start();
+
         if(!country.GetIsContaminated())
             countryBtn.setEnabled(false);
         btnList.add(countryBtn);
